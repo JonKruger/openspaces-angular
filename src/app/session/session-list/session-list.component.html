@@ -1,3 +1,37 @@
-<p>
-  session-list works!
-</p>
+<div class="page-header">CodeMash Open Spaces</div>
+
+<p id="notice"></p>
+<table *ngIf="sessionList">
+	<thead>
+    <tr>
+      <td *ngFor="let header of this.sessionListHeaders()" [class]="header.class">
+        <div>{{header.text}}</div>
+      
+      </td>
+		</tr>
+	</thead>	
+  <tbody>	
+      <tr *ngFor="let ms of sessionList.meeting_spaces">	
+        <td class="header meeting-space-header">{{ms.name}}</td>
+        <td *ngFor="let ts of sessionList.time_slots" [class]="this.existingSession(sessionList,ts,ms) ? 'taken' : 'available'">
+          <div *ngFor="let session of [this.existingSession(sessionList,ts,ms)]">
+          	<div *ngIf="this.shouldShowSession(sessionList,ts,ms)" [class]="(ts.id == sessionList.current_time_slot.id ? 'current' : 'not-current')">
+              <div class="title">
+                <a [routerLink]="['/sessions',session.id]">
+                  {{session.title}}
+                </a>
+              </div>
+              <div class="owner">
+                <a *ngIf="session.twitter_url" [href]="session.twitter_url" target="openspacetwitter">{{session.owner}}</a>
+                <span *ngIf="!session.twitter_url">{{session.owner}}</span>
+              </div>
+              <div class="inline-meeting-space">Meeting space {{ms.name}}</div>
+            </div>
+            <div *ngIf="!session" [class]="(ts.id == sessionList.current_time_slot.id ? 'current' : 'not-current')">
+              <a [routerLink]="['/sessions/new']" [queryParams]="{time_slot_id: ts.id, meeting_space_id: ms.id}">Create</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+	</tbody>
+</table>

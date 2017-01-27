@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import {SessionModule} from './session/session.module';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    AppRoutingModule,    
     SessionModule
   ],
   providers: [],
