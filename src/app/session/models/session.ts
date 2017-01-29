@@ -8,7 +8,7 @@ export class Session {
 	meeting_space_id: number;
 	readonly: boolean;
 
-  constructor(json: any) {
+  constructor(json: any = null) {
     if (json)
       Object.assign(this, json);
   }

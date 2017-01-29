@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+body
+{
+  background-color: #f2f2f3;
+}
+
+body {
+/*  background-color: #fff; */
+  color: #333;
+  font-family: "Segoe UI", arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+p, ol, ul, td {
+  font-family: "Segoe UI", arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a 
+{
+  color: #000;
+}
+
+a:visited 
+{
+  color: #666;
+}
+
+a:hover 
+{
+  color: #fff;
+  background-color: #000;
+}
+
+@media only screen and (max-device-width: 480px) 
+{
+  body {
+    font-size: 16px;
+  }
+
+  p, ol, ul, td {
+    font-size: 16px;
+  }
+
+  table
+  {
+    width: 100%;
+  }
+}
+
+
+:host {
+  display: block;
+  padding: 0 16px;
+}
