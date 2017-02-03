@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Session } from './models/session';
+import { TimeSlot } from './models/timeSlot';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 //import 'rxjs/add/operator/do';  // for debugging
@@ -21,6 +22,12 @@ export class SessionService {
   getSessions(): Observable<any> {
     return this.http.get('http://localhost:3000/api/sessions')
                     .map((res: Response) => res.json())
+                    .map(data => {
+                      data.sessions = data.sessions.map(s => new Session(s));
+                      data.time_slots = data.time_slots.map(ts => new TimeSlot(ts));
+                      data.current_time_slot = new TimeSlot(data.current_time_slot);
+                      return data;
+                    })
                     //.do(data => console.log('server data:', data))  // debug
                     .catch(this.handleError);
   }

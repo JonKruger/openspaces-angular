@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../session.service';
 import { Session } from '../models/session';
+import {TimeSlot} from '../models/timeSlot';
 
 @Component({
   selector: 'app-session-list',
@@ -37,7 +38,7 @@ export class SessionListComponent implements OnInit {
 		let result = [{class: 'meeting-space-header', text: 'Meeting Space' }]
 
 		for (let ts of this.sessionList.time_slots) {
-			if (this.showPastSessions() || !this.isTimeSlotInPast(ts)) {
+			if (this.showPastSessions() || !ts.isTimeSlotInPast()) {
 				result.push(
 				{
 					class: (ts.id == this.sessionList.current_time_slot.id ? 'current' : 'not-current'), 
@@ -48,19 +49,13 @@ export class SessionListComponent implements OnInit {
 		return result;
 	}
 
-	isTimeSlotInPast(time_slot: any) {
-		let endTime = +new Date(<string>time_slot.end_time);
-		let comparisonTime = +new Date(+new Date() - (15*60000));
-		return endTime < comparisonTime;
-	}
-
 	showPastSessions() {
 		return true;
    //      (params['show-past-sessions'] && params['show-past-sessions'].to_i == 0) ? false : true
 	}
 
 	shouldShowSession(sessionList: any, time_slot: any, meeting_space: any) {
-		return (this.showPastSessions() || !this.isTimeSlotInPast(time_slot)) && this.existingSession(sessionList, time_slot, meeting_space);      
+		return (this.showPastSessions() || !time_slot.isTimeSlotInPast()) && this.existingSession(sessionList, time_slot, meeting_space);      
 	}
 
 	formatTimeSlot(timeSlot: any) {
