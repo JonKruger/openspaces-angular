@@ -54,10 +54,6 @@ export class SessionListComponent implements OnInit {
    //      (params['show-past-sessions'] && params['show-past-sessions'].to_i == 0) ? false : true
 	}
 
-	shouldShowSession(sessionList: any, time_slot: any, meeting_space: any) {
-		return (this.showPastSessions() || !time_slot.isTimeSlotInPast()) && this.existingSession(sessionList, time_slot, meeting_space);      
-	}
-
 	formatTimeSlot(timeSlot: any) {
 		return 'todo';
 	}

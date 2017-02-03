@@ -14,13 +14,11 @@
       <tr *ngFor="let ms of sessionList.meeting_spaces">	
         <td class="header meeting-space-header">{{ms.name}}</td>
         <td *ngFor="let ts of sessionList.time_slots" [class]="this.existingSession(sessionList,ts,ms) ? 'taken' : 'available'">
-          <div *ngFor="let session of [this.existingSession(sessionList,ts,ms)]">
-            <session-list-session 
-              [session]="session" 
-              [timeSlot]="ts" 
-              [meetingSpace]="ms"
-              [currentTimeSlot]="sessionList.current_time_slot"></session-list-session>
-          </div>
+          <session-list-session 
+            [session]="this.existingSession(sessionList,ts,ms)" 
+            [timeSlot]="ts" 
+            [meetingSpace]="ms"
+            [currentTimeSlot]="sessionList.current_time_slot"></session-list-session>
         </td>
       </tr>
 	</tbody>
