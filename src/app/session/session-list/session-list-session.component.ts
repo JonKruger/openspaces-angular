@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SessionService } from '../session.service';
 import { Session } from '../models/session';
 import { TimeSlot } from '../models/timeSlot';
+import { MeetingSpace } from '../models/meetingSpace';
 
 @Component({
   selector: 'session-list-session',
@@ -11,7 +12,7 @@ import { TimeSlot } from '../models/timeSlot';
 export class SessionListSessionComponent {
   @Input() session : Session;
   @Input() timeSlot : TimeSlot;
-  @Input() meetingSpace : any;
+  @Input() meetingSpace : MeetingSpace;
   @Input() currentTimeSlot : TimeSlot;
 
 	showPastSessions() {
