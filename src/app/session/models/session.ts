@@ -1,6 +1,6 @@
 export class Session {
 	session_id: number;
-	title: number;
+	title: string;
 	owner: string;
 	twitter_handle: string;
 	twitter_url: string;
@@ -12,4 +12,12 @@ export class Session {
     if (json)
       Object.assign(this, json);
   }
+
+	isValid() {
+		return this.isEmpty(this.title) || this.isEmpty(this.owner);
+	}
+
+	isEmpty(str : string) : boolean {
+    return (!str || 0 === str.length);
+	}
 }

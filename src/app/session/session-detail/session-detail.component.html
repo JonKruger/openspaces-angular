@@ -1,24 +1,28 @@
 <div *ngIf="session">
 
 	<h1>Edit Session</h1>
+  <form (ngSubmit)="onSave(session)" #sessionForm="ngForm">
 
   <div class="field">
   	Title:<br/>
-  	<input type="text" size="20" maxlength="75" required="true" [(ngModel)]="session.title" />
+  	<input name="title" type="text" size="20" maxlength="75" required="true" [(ngModel)]="session.title" #title="ngModel" />
+    <span [hidden]="title.valid">Title is required</span>
   </div>
   <div class="field">
   	Your Name<br/>
-  	<input type="text" size="20" maxlength="25" required="true" [(ngModel)]="session.owner" />
+  	<input name="owner" type="text" size="20" maxlength="25" required="true" [(ngModel)]="session.owner" #owner="ngModel" />
+    <span [hidden]="owner.valid">Owner is required</span>
   </div>
   <div class="field">
   	Twitter Handle<br/>
-  	<input type="text" size="20" maxlength="25" required="true" [(ngModel)]="session.twitter_handle" />
+  	<input name="twitterHandle" type="text" size="20" maxlength="25" [(ngModel)]="session.twitter_handle" #twitterHandle="ngModel" />
   </div>
-
+  <br/>
   <div class="actions" *ngIf="!session.readonly">
-  	<input type="submit" value="Submit" (click)="onSave(session)" />
-  	<input type="submit" value="Delete This Session" (click)="onDelete(session)" />
+  	<input type="submit" value="Submit" [disabled]="!sessionForm.form.valid" />
+  	<input type="button" value="Delete This Session" (click)="onDelete(session)" />
   </div>
+  </form>
 
   <a [routerLink]="['/sessions']">Back to session list</a>
 
