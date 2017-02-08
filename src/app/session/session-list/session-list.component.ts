@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../session.service';
 import { Session } from '../models/session';
 import {TimeSlot} from '../models/timeSlot';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-session-list',
@@ -54,12 +55,12 @@ export class SessionListComponent implements OnInit {
    //      (params['show-past-sessions'] && params['show-past-sessions'].to_i == 0) ? false : true
 	}
 
-	formatTimeSlot(timeSlot: any) {
-		return 'todo';
+	formatTimeSlot(timeSlot: TimeSlot) : string {
+		return this.formatTimeSlotDate(timeSlot.start_time) + '-' + this.formatTimeSlotDate(timeSlot.end_time);
 	}
 
-	formatTimeSlotDate(date: Date) {
-		return 'todo';
+	formatTimeSlotDate(date: Date) : string {
+		return moment(date).format("ddd h:mma")
 	}
   
 }
