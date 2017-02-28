@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SessionService } from '../session.service';
 import { Session } from '../models/session';
 import {TimeSlot} from '../models/timeSlot';
 import * as moment from 'moment';
+import { Subscription }       from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-session-list',
   templateUrl: './session-list.component.html',
   styleUrls: ['./session-list.component.css', '../../app.component.css']
 })
-export class SessionListComponent implements OnInit {
+export class SessionListComponent implements OnInit, OnDestroy {
 
   sessionList: any;
   errorMessage: string;
+	private sub: Subscription;
 
   constructor(private _sessionService: SessionService) { }
 
@@ -20,15 +22,18 @@ export class SessionListComponent implements OnInit {
 		this.getSessions();
 	}
 
+	ngOnDestroy() {
+		this.sub.unsubscribe();
+	}
+
 	getSessions()
 	{
-		this._sessionService.getSessions()
+		this.sub = this._sessionService.getSessions()
 				.subscribe(
         data => this.sessionList = data,
         error => this.errorMessage = <any>error
 				);
 	}
-
 
 	existingSession(sessionList: any, time_slot: any, meeting_space: any) {
 		let result = sessionList.sessions.filter((s: any) => s.time_slot_id === time_slot.id && s.meeting_space_id === meeting_space.id)[0];
