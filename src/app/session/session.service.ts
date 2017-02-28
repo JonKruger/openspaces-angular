@@ -8,9 +8,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 //import 'rxjs/add/operator/do';  // for debugging
 
-/**
- * This class provides the NameList service with methods to read names and add names.
- */
 @Injectable()
 export class SessionService {
 
