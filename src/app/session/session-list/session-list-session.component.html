@@ -1,15 +1,15 @@
-	<div *ngIf="this.shouldShowSession()" [class]="(this.isCurrent() ? 'current' : 'not-current')">
-              <div class="title">
-                <a [routerLink]="['/sessions',session.id]">
+<div *ngIf="this.shouldShowSession()" [class]="(this.isCurrent() ? 'current' : 'not-current')">
+  <div class="title">
+    <a [routerLink]="['/sessions',session.id]">
                   {{session.title}}
                 </a>
-              </div>
-              <div class="owner">
-                <a *ngIf="session.twitter_url" [href]="session.twitter_url" target="openspacetwitter">{{session.owner}}</a>
-                <span *ngIf="!session.twitter_url">{{session.owner}}</span>
-              </div>
-              <div class="inline-meeting-space">Meeting space {{meetingSpace.name}}</div>
-            </div>
-            <div *ngIf="!session" [class]="(this.isCurrent() ? 'current' : 'not-current')">
-              <a [routerLink]="['/sessions/new']" [queryParams]="{time_slot_id: this.timeSlot.id, meeting_space_id: this.meetingSpace.id}">Create</a>
-            </div>
+  </div>
+  <div class="owner">
+    <a *ngIf="session.twitter_url" [href]="session.twitter_url" target="openspacetwitter">{{session.owner}}</a>
+    <span *ngIf="!session.twitter_url">{{session.owner}}</span>
+  </div>
+  <div class="inline-meeting-space">Meeting space {{meetingSpace.name}}</div>
+</div>
+<div *ngIf="!session" [class]="(this.isCurrent() ? 'current' : 'not-current')">
+  <a [routerLink]="['/sessions/new']" [queryParams]="{time_slot_id: this.timeSlot.id, meeting_space_id: this.meetingSpace.id}">Create</a>
+</div>
