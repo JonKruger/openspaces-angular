@@ -18,7 +18,7 @@ export class SessionService {
    * @return {any} The Observable for the HTTP request.
    */
   getSessions(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/sessions')
+    return this.http.get('http://stirtrekopenspaces.herokuapp.com/api/sessions')
                     .map((res: Response) => res.json())
                     .map(data => {
                       data.sessions = data.sessions.map(s => new Session(s));
@@ -32,7 +32,7 @@ export class SessionService {
   }
 
   getSession(id: number): Observable<Session> {
-    return this.http.get('http://localhost:3000/api/sessions/' + id.toString())
+    return this.http.get('http://stirtrekopenspaces.herokuapp.com/api/sessions/' + id.toString())
                     .map((res: Response) => new Session(res.json()))
                     .catch(this.handleError);
   }
@@ -43,7 +43,7 @@ export class SessionService {
     let options = new RequestOptions({ headers: headers });
 
     let data = JSON.stringify(session);
-    return this.http.post('http://localhost:3000/api/sessions/save', data, options)
+    return this.http.post('http://stirtrekopenspaces.herokuapp.com/api/sessions/save', data, options)
                     .map((res: Response) => new Session(res.json()))
                     .catch(this.handleError);
   }
